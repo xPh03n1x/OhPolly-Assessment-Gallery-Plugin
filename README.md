@@ -39,4 +39,12 @@ From this same page you can also modify or delete gallery items.
 *Note*
 > You can remove multiple entries at once by selecting the images you want removed, and then using the option under "Actions"
 
+If you want to set the page as the Homepage for your website, go to:
+
+*System* -> *Configuration* -> *General* -> *Web* -> *Default Pages*
+
+and define as **Default Web URL** the module handler:
+
+> quickshop
+
 ----------

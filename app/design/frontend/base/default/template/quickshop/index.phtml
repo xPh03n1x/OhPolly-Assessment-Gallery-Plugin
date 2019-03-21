@@ -1,1 +1,19 @@
-Frontend page for QuickShop
+<style>
+	div.quickShopBody{width:100%;display:flex;flex-flow:row wrap;}
+	div.quickShopBody div.qsRow{width:100%;display:flex;flex-direction:row;justify-content:center;align-items:center;}
+	div.quickShopBody a{display:block;height:65vh;flex:1 1 auto;cursor:pointer;background-position:50% 0%;background-size:cover;transition:all ease 120ms;}
+	div.quickShopBody a:hover{box-shadow:inset 0 0 30px 10px white;}
+</style>
+<div class='quickShopBody'>
+	<div class='qsRow'>
+<?php
+$perRow=Mage::getStoreConfig('quickshop/settings/row_items');
+$c=1;
+$total=count($this->getQuickShopGallery());
+foreach($this->getQuickShopGallery() as $k=>$image){
+	echo '<a href="'.$image->getLink().'" style="background-image:url(/media/'.$image->getImageName().');" target="_blank"/>'.(($c%$perRow)==0&&$total>$c?'</div><div class="qsRow">':'');
+	$c++;
+}
+?>
+	</div>
+</div>
