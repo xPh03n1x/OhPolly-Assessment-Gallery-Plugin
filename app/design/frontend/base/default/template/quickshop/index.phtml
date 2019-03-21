@@ -1,39 +1,186 @@
 <style>
 	/* This is how I personally write my CSS */
-	
+	/*	
 	div.quickShopBody{width:100%;display:flex;flex-flow:row wrap;}
 	div.quickShopBody div.qsRow{width:100%;display:flex;flex-flow:row wrap;justify-content:center;align-items:center;}
 	div.quickShopBody a{display:block;height:65vh;flex:1 1 auto;cursor:pointer;background-position:50% 0%;background-size:cover;background-repeat:no-repeat;transition:all ease 120ms;min-width:200px;}
 	div.quickShopBody a:hover{box-shadow:inset 0 0 30px 10px white;}
 
+	div.qsPagination{display:flex;flex-direction:row;justify-content:center;align-items:center;margin:10px 0;}
+	div.qsPagination span{font-size:16px;margin:0 5px;cursor:pointer;border-bottom:2px solid transparent;transition:all ease 100ms;opacity:0.8;}
+	div.qsPagination span:hover{border-color:silver;opacity:0.9;}
+	div.qsPagination span.activePage{border-color:black;opacity:1;}
+	*/
+
 
 	/*
 		Thus its rather easy to just translate it into SASS syntax
 
+		div.quickShopBody{
+		  width:100%;
+		  display:flex;
+		  flex-flow:row wrap;
+		  
+		  div.qsRow{
+		    width:100%;
+		    display:flex;
+		    flex-flow:row wrap;
+		    justify-content:center;
+		    align-items:center;
+		  }
+
+		  a{
+		    display:block;
+		    height:65vh;
+		    flex:1 1 auto;
+		    cursor:pointer;
+		    background-position:50% 0%;
+		    background-size:cover;
+		    background-repeat:no-repeat;
+		    transition:all ease 120ms;
+		    min-width:200px;
+		    &:hover{box-shadow:inset 0 0 30px 10px white;}
+		  }
+		  
+		}
+
+		div.qsPagination{
+		  display:flex;
+		  flex-direction:row;
+		  justify-content:center;
+		  align-items:center;
+		  margin:10px 0;
+		  span{
+		    font-size:16px;
+		    margin:0 5px;
+		    cursor:pointer;
+		    border-bottom:2px solid transparent;
+		    transition:all ease 100ms;
+		    opacity:0.8;
+		    
+		    &:hover{
+		      border-color:silver;
+		      opacity:0.9;
+		    }
+
+		    &.activePage{
+		      border-color:black;
+		      opacity:1;
+		    }
+
+		  }
+		}
+
 	*/
 
 	/* However, since Magento 1 doesn't have a built-in SASS parser, I will use pre-compiled CSS:*/
+div.quickShopBody {
+  width: 100%;
+  display: flex;
+  flex-flow: row wrap;
+}
+div.quickShopBody div.qsRow {
+  width: 100%;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  align-items: center;
+}
+div.quickShopBody a {
+  display: block;
+  height: 65vh;
+  flex: 1 1 auto;
+  cursor: pointer;
+  background-position: 50% 0%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  transition: all ease 120ms;
+  min-width: 200px;
+}
+div.quickShopBody a:hover {
+  box-shadow: inset 0 0 30px 10px white;
+}
 
+div.qsPagination {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin: 10px 0;
+}
+div.qsPagination span {
+  font-size: 16px;
+  margin: 0 5px;
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  transition: all ease 100ms;
+  opacity: 0.8;
+}
+div.qsPagination span:hover {
+  border-color: silver;
+  opacity: 0.9;
+}
+div.qsPagination span.activePage {
+  border-color: black;
+  opacity: 1;
+}
 </style>
-<script type="text/javascript">
-	// jQuery('body').on('click','div.quickShopBody div.qsRow a',function(e){
-	// 	e.preventDefault();
-	// 	window.location.href=jQuery(this).attr('target');
-
-	// 	// Instead of loading the target URL in the same tab, we can open a new one [can be alterable through a setting]
-	// 	// window.open(jQuery(this).attr('target'),'_blank');
-	// });
-</script>
 <div class='quickShopBody'>
-	<div class='qsRow'>
 <?php
 $perRow=Mage::getStoreConfig('quickshop/settings/row_items');
 $c=1;
 $total=count($this->getQuickShopGallery());
+
+echo "<div class='qsRow'>";
 foreach($this->getQuickShopGallery() as $k=>$image){
-	echo '<a c="'.$c.'" href="'.$image->getLink().'" style="background-image:url(/media/'.$image->getImageName().');" target="_blank" ></a>'.(($c%$perRow)==0&&$total>$c?'</div><div class="qsRow">':'');
+	echo '<a href="'.$image->getLink().'" style="background-image:url(/media/'.$image->getImageName().');" target="_blank" ></a>'.(($c%$perRow)==0&&$total>$c?'</div><div class="qsRow">':'');
 	$c++;
 }
+echo "</div></div><div class='qsPagination'>";
+
+if($this->getGalleryPages()>1){
+	for($pc=1;$pc<=$this->getGalleryPages();$pc++){
+		echo '<span '.($pc==1?'class="activePage"':'').'>'.$pc.'</span>';
+	}
+}
+
 ?>
-	</div>
 </div>
+<script type="text/javascript">
+	jQuery('body').on('click','div.qsPagination span',function(e){
+		e.preventDefault();
+
+		// We don't want to take any actions if the active page is clicked
+		if(jQuery(this).hasClass('activePage')){return;}
+
+		var targetPage=jQuery(this).html();
+
+		jQuery(this).addClass('pending');
+
+		// In order to keep the gallery's height intact when the page changed, we set an artificial height
+		jQuery('div.quickShopBody').height(jQuery('div.quickShopBody').outerHeight()).css({'opacity':0});
+
+		jQuery.post('/',{'getQuickShopPage':targetPage},function(r){
+			try{
+				var gallery=JSON.parse(r);
+				var c=1;
+				// We have a valid JSON response, let's empty the container
+				jQuery('div.quickShopBody').html("<div class='qsRow'></div>");
+				gallery.forEach(function(img,index){
+					jQuery('<a href="'+img.link+'" style="background-image:url(/media/'+img.img+');" target="_blank"></a>').appendTo('div.quickShopBody div.qsRow:last-child');
+					if(c%<?=$perRow;?>==0&&<?=$total;?>>c){
+						jQuery("<div class='qsRow'></div>").appendTo('div.quickShopBody');
+					}
+					c++;
+				});
+				jQuery('div.qsPagination span.activePage').removeClass('activePage');
+				jQuery('div.qsPagination span.pending').addClass('activePage').removeClass('pending');
+			}
+			catch{
+				console.log('AJAX for pagination failed');
+				jQuery('div.qsPagination span.pending').removeClass('pending');
+			}
+		});
+		jQuery('div.quickShopBody').css({'opacity':1}).height('auto');
+	});
+</script>
