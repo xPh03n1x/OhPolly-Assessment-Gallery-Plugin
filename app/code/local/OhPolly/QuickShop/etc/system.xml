@@ -32,6 +32,7 @@
 							<show_in_website>1</show_in_website>
 							<show_in_store>1</show_in_store>
 							<comment>The name of the page displayed on your website. Default: QuickShop</comment>
+							<validate>required-entry</validate>
 						</page_title>
 						<page_breadcrumbs translate="label">
 							<label>Breadcrumbs</label>
@@ -61,6 +62,8 @@
 							<show_in_website>1</show_in_website>
 							<show_in_store>1</show_in_store>
 							<comment>How many images should be rendered per page</comment>
+							<validate>required-entry</validate>
+							<validate>validate-greater-than-zero</validate>
 						</page_items>
 					</fields>
 				</settings>
