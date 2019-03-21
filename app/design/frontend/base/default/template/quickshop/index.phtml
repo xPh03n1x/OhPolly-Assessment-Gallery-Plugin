@@ -160,7 +160,7 @@ if($this->getGalleryPages()>1){
 		// In order to keep the gallery's height intact when the page changed, we set an artificial height
 		jQuery('div.quickShopBody').height(jQuery('div.quickShopBody').outerHeight()).css({'opacity':0});
 
-		jQuery.post('/',{'getQuickShopPage':targetPage},function(r){
+		jQuery.post(self.location.href,{'getQuickShopPage':targetPage},function(r){
 			try{
 				var gallery=JSON.parse(r);
 				var c=1;
