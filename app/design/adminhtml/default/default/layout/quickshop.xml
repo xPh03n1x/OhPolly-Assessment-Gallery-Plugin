@@ -1,8 +1,12 @@
 <?xml version="1.0"?>
 <layout version="0.1.0">
-	<quickshop_backend>
+	<quickshop_adminhtml_quickshop_index>
 		<reference name="content">
-			<block type="quickshop/backend" name="quickshop_backend" template="quickshop/backend.html"/>
+			<!-- Use Magento's grid -->
+			<block type="quickshop/adminhtml_quickshop" name="quickshop" />
+
+			<!-- Use custom template file
+			<block type="quickshop/adminhtml_quickshop" name="quickshop" template="quickshop/backend.phtml"/> -->
 		</reference>
-	</quickshop_backend>
+	</quickshop_adminhtml_quickshop_index>
 </layout>

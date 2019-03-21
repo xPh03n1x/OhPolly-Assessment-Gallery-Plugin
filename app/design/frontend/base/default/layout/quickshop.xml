@@ -9,5 +9,5 @@
 		<reference name="content">
 			<block type="quickshop/index" name="quickshop_index" template="quickshop/index.phtml"/>
 		</reference>
-	</quickshop_index_index>   
+	</quickshop_index_index>
 </layout>

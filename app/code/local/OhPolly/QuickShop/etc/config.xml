@@ -34,6 +34,20 @@
 				<class>OhPolly_QuickShop_Block</class>
 			</quickshop>
 		</blocks>
+		<models>
+			<quickshop>
+				<class>OhPolly_QuickShop_Model</class>
+				<resourceModel>quickshop_mysql4</resourceModel>
+			</quickshop>
+			<quickshop_mysql4>
+				<class>OhPolly_QuickShop_Model_Mysql4</class>
+				<entities>
+					<quickshop>
+						<table>a_ohpolly_quickshop</table>
+					</quickshop>
+				</entities>
+			</quickshop_mysql4>
+		</models>
 		<resources>
 			<quickshop_setup>
 				<setup>
@@ -70,11 +84,11 @@
 		<menu>
 			<cms module="quickshop">
 				<children>
-					<quickshopbackend module="quickshop">
+					<quickshop module="quickshop">
 						<title>QuickShop</title>
 						<sort_order>100</sort_order>
-						<action>admin_quickshop/adminhtml_quickshopbackend</action>
-					</quickshopbackend>
+						<action>admin_quickshop/adminhtml_quickshop</action>
+					</quickshop>
 				</children>
 			</cms>
 		</menu>
@@ -87,9 +101,9 @@
 					<children>
 						<cms translate="title" module="quickshop">
 							<children>
-								<quickshopbackend translate="title">
+								<quickshop translate="title">
 									<title>QuickShop</title>
-								</quickshopbackend>
+								</quickshop>
 							</children>
 						</cms>
 					</children>

@@ -9,7 +9,7 @@
 							<config>
 								<children>
 									<quickshop translate="title" module="quickshop">
-										<title>QuickShop Module Section</title>
+										<title>ohPolly QuickShop</title>
 										<sort_order>0</sort_order>
 									</quickshop>
 								</children>
