@@ -133,7 +133,7 @@ $total=count($this->getQuickShopGallery());
 
 echo "<div class='qsRow'>";
 foreach($this->getQuickShopGallery() as $k=>$image){
-	echo '<a href="'.$image->getLink().'" style="background-image:url(/media/'.$image->getImageName().');" target="_blank" ></a>'.(($c%$perRow)==0&&$total>$c?'</div><div class="qsRow">':'');
+	echo '<a href="'.$image->getLink().'" style="background-image:url(media/'.$image->getImageName().');" target="_blank" ></a>'.(($c%$perRow)==0&&$total>$c?'</div><div class="qsRow">':'');
 	$c++;
 }
 echo "</div></div><div class='qsPagination'>";
@@ -167,7 +167,7 @@ if($this->getGalleryPages()>1){
 				// We have a valid JSON response, let's empty the container
 				jQuery('div.quickShopBody').html("<div class='qsRow'></div>");
 				gallery.forEach(function(img,index){
-					jQuery('<a href="'+img.link+'" style="background-image:url(/media/'+img.img+');" target="_blank"></a>').appendTo('div.quickShopBody div.qsRow:last-child');
+					jQuery('<a href="'+img.link+'" style="background-image:url(media/'+img.img+');" target="_blank"></a>').appendTo('div.quickShopBody div.qsRow:last-child');
 					if(c%<?=$perRow;?>==0&&<?=$total;?>>c){
 						jQuery("<div class='qsRow'></div>").appendTo('div.quickShopBody');
 					}
