@@ -9,13 +9,15 @@ class OhPolly_QuickShop_Block_Adminhtml_Quickshop_Edit extends Mage_Adminhtml_Bl
 		$this->_controller="adminhtml_quickshop";
 		$this->_updateButton("save","label",Mage::helper("quickshop")->__("Save"));
 		$this->_updateButton("delete","label",Mage::helper("quickshop")->__("Delete"));
-		$this->_addButton("saveandcontinue",array(
-			"label"=>Mage::helper("quickshop")->__("Save Changes And Continue Editing"),
-			"onclick"=>"saveAndContinueEdit()",
-			"class"=>"save",
-		),-100);
 
-		$this->_formScripts[]="function saveAndContinueEdit(){editForm.submit($('edit_form').action+'back/edit/');}";
+		// If we also wanted to add "Save and Continue" we can use:
+		// $this->_addButton("saveandcontinue",array(
+		// 	"label"=>Mage::helper("quickshop")->__("Save Changes And Continue Editing"),
+		// 	"onclick"=>"saveAndContinueEdit()",
+		// 	"class"=>"save",
+		// 	),-100);
+
+		// $this->_formScripts[]="function saveAndContinueEdit(){editForm.submit($('edit_form').action+'back/edit/');}";
 	}
 
 	public function getHeaderText(){
