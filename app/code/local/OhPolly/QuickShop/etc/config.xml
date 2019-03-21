@@ -68,17 +68,15 @@
 	</admin>
 	<adminhtml>
 		<menu>
-			<quickshop module="quickshop">
-				<title>QuickShop</title>
-				<sort_order>100</sort_order>
+			<cms module="quickshop">
 				<children>
 					<quickshopbackend module="quickshop">
-						<title>QuickShop Management</title>
-						<sort_order>0</sort_order>
+						<title>QuickShop</title>
+						<sort_order>100</sort_order>
 						<action>admin_quickshop/adminhtml_quickshopbackend</action>
 					</quickshopbackend>
 				</children>
-			</quickshop>
+			</cms>
 		</menu>
 		<acl>
 			<resources>
@@ -87,15 +85,13 @@
 				</all>
 				<admin>
 					<children>
-						<quickshop translate="title" module="quickshop">
-							<title>QuickShop</title>
-							<sort_order>1000</sort_order>
+						<cms translate="title" module="quickshop">
 							<children>
 								<quickshopbackend translate="title">
-									<title>QuickShop Management</title>
+									<title>QuickShop</title>
 								</quickshopbackend>
 							</children>
-						</quickshop>
+						</cms>
 					</children>
 				</admin>
 			</resources>
