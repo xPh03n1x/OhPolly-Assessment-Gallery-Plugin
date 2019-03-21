@@ -1,3 +1,4 @@
+
 QuickShop by ohPolly
 ===================
 QuickShop is a module for Magento **1** that allows you to create a gallery of images, with links to different URLs.
@@ -12,6 +13,8 @@ Once the files are placed within your Magento, access your admin panel and head 
 
 On this page you should pick:
 
+ - the title of the Front End page
+ - whether Magento's Breadcrumbs be displayed on the Front End page
  - how many gallery items you want displayed per row
  - the total amount of items you want to be displayed *per page*
 

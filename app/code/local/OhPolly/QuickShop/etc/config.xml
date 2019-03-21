@@ -118,4 +118,14 @@
 			</updates>
 		</layout>
 	</adminhtml>
-</config> 
+	<default>
+		<quickshop>
+			<settings>
+				<page_title>QuickShop</page_title>
+				<page_breadcrumbs>no</page_breadcrumbs>
+				<row_items>3</row_items>
+				<page_items>12</page_items>
+			</settings>
+		</quickshop>
+	</default>
+</config>
