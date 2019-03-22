@@ -9,7 +9,9 @@ Installation
 ------------
 To install the module in your Magento 1 instance, you can directly checkout the repository to your document root.
 
-Once the files are placed within your Magento, access your admin panel and head to the configuration page: *System* -> *Configuration* -> *QuickShop Gallery*
+Once the files are placed within your Magento, access your admin panel and head to the *System* -> *Cache Management* page. You should refresh your store's cache (*if Enabled*), and **Flush Magento Cache**.
+
+Flushing the store's cache will trigger the module's installation process. After this you are ready to proceed to the configuration page: *System* -> *Configuration* -> *QuickShop Gallery*
 
 On this page you should pick:
 
